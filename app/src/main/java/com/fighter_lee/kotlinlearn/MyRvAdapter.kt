@@ -1,17 +1,34 @@
 package com.fighter_lee.kotlinlearn
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.fighter_lee.kotlinlearn.data.ForecastResult
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * @author fighter_lee
  * @date 2017/12/5
  */
-class MyRvAdapter(var list:List<String>): RecyclerView.Adapter<MyRvAdapter.MyViewHolder>() {
+class MyRvAdapter(var list:List<ForecastResult.ListBean>,var mCx:Context): RecyclerView.Adapter<MyRvAdapter.MyViewHolder>() {
+    var TAG = "MyRvAdapter"
+    init {
+
+    }
+
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
-        holder!!.tv.setText(list[position])
+        Log.d(TAG,"data:${list[position].dt}")
+        val data = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(list[position].dt * 1000))
+        Log.d(TAG,data)
+        holder!!.date.text = data
+        holder.description.text = list[position].weather?.get(0)?.description ?: "null"
+        holder.maxTemperature.text = list[position].temp?.max.toString()
+        holder.minTemperature.text = list[position].temp?.min.toString()
     }
 
     override fun getItemCount(): Int {
@@ -19,10 +36,14 @@ class MyRvAdapter(var list:List<String>): RecyclerView.Adapter<MyRvAdapter.MyVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MyViewHolder {
-        return MyViewHolder(TextView(parent!!.context))
+        val inflate = LayoutInflater.from(mCx).inflate(R.layout.item_forecast, parent, false)
+        return MyViewHolder(inflate)
     }
 
     class MyViewHolder(itemView:View) :RecyclerView.ViewHolder(itemView){
-        var tv:TextView = itemView as TextView;
+        var date:TextView = itemView.findViewById(R.id.date) as TextView
+        var description:TextView = itemView.findViewById(R.id.description) as TextView
+        var maxTemperature:TextView = itemView.findViewById(R.id.maxTemperature) as TextView
+        var minTemperature:TextView = itemView.findViewById(R.id.minTemperature) as TextView
     }
 }
