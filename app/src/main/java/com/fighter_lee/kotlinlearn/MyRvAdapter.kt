@@ -16,9 +16,20 @@ import java.util.*
  * @date 2017/12/5
  */
 class MyRvAdapter(var list:List<ForecastResult.ListBean>,var mCx:Context): RecyclerView.Adapter<MyRvAdapter.MyViewHolder>() {
-    var TAG = "MyRvAdapter"
-    init {
 
+    companion object {
+        var TAG = "MyRvAdapter"
+    }
+
+
+    private lateinit var callback: (item: View, posit: Int) -> Unit
+
+    /**
+     * TODO 回调 是否有更好的方法
+     * http://www.jianshu.com/p/f711a1bc887a
+     */
+    open fun setOnclickListener(callback:(item:View, posit:Int)->Unit){
+        this.callback = callback
     }
 
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
@@ -29,6 +40,9 @@ class MyRvAdapter(var list:List<ForecastResult.ListBean>,var mCx:Context): Recyc
         holder.description.text = list[position].weather?.get(0)?.description ?: "null"
         holder.maxTemperature.text = list[position].temp?.max.toString()
         holder.minTemperature.text = list[position].temp?.min.toString()
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            callback.invoke(holder.itemView,position)
+        })
     }
 
     override fun getItemCount(): Int {

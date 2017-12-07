@@ -13,6 +13,7 @@ import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
+
     var TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +80,13 @@ class MainActivity : AppCompatActivity() {
         for ((key, value) in mutableMapOf) {
             Log.d(TAG, "key:$key value:$value")
         }
+
+//        Bb().setListener(Bb.BBB {  position: Int, ttt: Int ->
+//
+//        })
+        (rv.adapter as MyRvAdapter).setOnclickListener({item, posit ->
+            toast("position:$posit")
+        })
 
         async {
             var forecastBean = ForecastRequest().execute()
