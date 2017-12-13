@@ -35,7 +35,7 @@ class MyRvAdapter(var list:List<ForecastResult.ListBean>,var mCx:Context): Recyc
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
         Log.d(TAG,"data:${list[position].dt}")
         val data = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(list[position].dt * 1000))
-        Log.d(TAG,data)
+//        Log.d(TAG,data)
         holder!!.date.text = data
         holder.description.text = list[position].weather?.get(0)?.description ?: "null"
         holder.maxTemperature.text = list[position].temp?.max.toString()
