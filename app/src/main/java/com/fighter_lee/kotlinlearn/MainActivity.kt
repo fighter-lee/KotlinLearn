@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.widget.Toast
 import com.fighter_lee.kotlinlearn.data.ForecastRequest
 import com.fighter_lee.kotlinlearn.data.ForecastResult
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             var forecastBean = ForecastRequest().execute()
             val list = forecastBean.list
             for (index in list!!.indices) {
-                Log.d(TAG, list[index].temp.toString())
+//                Log.d(TAG, list[index].temp.toString())
                 dataLists.addAll(list)
             }
             uiThread {

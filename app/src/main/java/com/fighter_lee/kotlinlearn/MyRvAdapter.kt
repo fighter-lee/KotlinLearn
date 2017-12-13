@@ -2,7 +2,6 @@ package com.fighter_lee.kotlinlearn
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,7 @@ class MyRvAdapter(var list:List<ForecastResult.ListBean>,var mCx:Context): Recyc
     }
 
     override fun onBindViewHolder(holder: MyViewHolder?, position: Int) {
-        Log.d(TAG,"data:${list[position].dt}")
+//        Log.d(TAG,"data:${list[position].dt}")
         val data = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(list[position].dt * 1000))
 //        Log.d(TAG,data)
         holder!!.date.text = data
