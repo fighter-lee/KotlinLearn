@@ -22,12 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         rv.setLayoutManager(LinearLayoutManager(this))
 
-        rv.adapter = MyRvAdapter(dataLists,this)
+        rv.adapter = MyRvAdapter(dataLists, this)
         toast("max is ${max(11, 12)}")
 
 //        Bb().setListener(Bb.BBB {  position: Int, ttt: Int ->
 //        })
-        (rv.adapter as MyRvAdapter).setOnclickListener({item, posit ->
+        (rv.adapter as MyRvAdapter).setOnclickListener({ item, posit ->
             toast("position:$posit")
         })
 
@@ -53,11 +53,14 @@ class MainActivity : AppCompatActivity() {
             //copy 仅仅改变参数中的属性，其他属性不变
             val doFun = 解构().doFun().copy(result = 2)
             //解构声明
-            var (result,status) = doFun
+            var (result, status) = doFun
             Log.d(TAG, "onCreate: $result,$status")
             Log.d(TAG, "onCreate: ${doFun.status.name},${doFun.result}")
         }
 
+        Test1().withTest()
+        Test1().runTest()
+        Test1().applyTest()
     }
 
     fun Context.toast(message: String, len: Int = Toast.LENGTH_SHORT) {
